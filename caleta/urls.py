@@ -7,6 +7,7 @@ urlpatterns = [
     path('api/anuncios/', include('anuncios.urls')),  # <== esta línea
     path('api/categorias/', include('categorias.urls')),
     path('api/productos/', include('productos.urls')),
+    path('api/recomendaciones/', include('Recomendaciones.urls')),  # <== esta línea
 
 
 ]
