@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'anuncios',
     'corsheaders',
     'categorias',
+    'productos',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
