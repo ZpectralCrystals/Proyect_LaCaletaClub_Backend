@@ -37,3 +37,20 @@ class UserCRUDViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().select_related('profile')
     serializer_class = UserFullSerializer
     permission_classes = [IsAuthenticated]
+
+
+from rest_framework import  status
+
+# accounts/views.py
+from rest_framework import viewsets, permissions
+from .models import Profile
+from .serializers import ProfilePointsSerializer
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.select_related('user').all()
+    serializer_class = ProfilePointsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset
+    

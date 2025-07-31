@@ -84,3 +84,22 @@ class UserFullSerializer(serializers.ModelSerializer):
 
         return instance
 
+class ProfileLiteSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'avatar_url']
+
+
+
+# accounts/serializers.py
+class ProfilePointsSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name', read_only=True)
+    last_name = serializers.CharField(source='user.last_name', read_only=True)
+    dni = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ['id', 'first_name', 'last_name', 'dni', 'puntos']
