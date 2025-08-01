@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'categorias',
     'productos',
     'Recomendaciones',
+    'blogs',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
