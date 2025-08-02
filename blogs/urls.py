@@ -1,11 +1,12 @@
-from rest_framework.routers import DefaultRouter
-from .views import BlogViewSet
-from django.urls import path, include
-
-router = DefaultRouter()
-router.register(r'', BlogViewSet)
+# blogs/urls.py
+from django.urls import path
+from .views import BlogPublicView, BlogAdminView, BlogAdminDetailView
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # Vista pública: solo GET
+    path('public/blogs/', BlogPublicView.as_view(), name='blog-public-list'),
+    
+    # Vista de admin: GET, POST, PATCH, DELETE
+    path('blogs/', BlogAdminView.as_view(), name='blog-admin-list'),
+    path('blogs/<int:pk>/', BlogAdminDetailView.as_view(), name='blog-admin-detail'),
 ]
-

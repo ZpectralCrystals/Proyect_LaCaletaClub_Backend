@@ -91,6 +91,7 @@ def update_user_profile(request):
         user.first_name = request.data.get('first_name', user.first_name)
         user.last_name = request.data.get('last_name', user.last_name)
         profile.avatar_url = request.data.get('avatar_url', profile.avatar_url)
+        profile.role = request.data.get('role', profile.role) 
         
         # Guardar los cambios
         user.save()
@@ -123,3 +124,40 @@ def change_password(request):
     user.save()
 
     return Response({"message": "Password updated successfully."})
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_user_role(request):
+    user = request.user
+
+    # Solo permitir que el admin cambie el rol
+    if not user.is_staff:  # Verifica si el usuario es un administrador
+        return Response({"detail": "No tienes permisos para cambiar el rol."}, status=403)
+    
+    # Si el admin tiene permisos, cambiar el rol
+    new_role = request.data.get('role')
+    if new_role in [1, 2, 3, 4, 5]:  # Validación de roles
+        profile = Profile.objects.get(user=user)
+        profile.role = new_role
+        profile.save()
+        return Response({"message": "Rol actualizado con éxito."}, status=200)
+    else:
+        return Response({"detail": "Rol inválido."}, status=400)
+
+
+# views.py (backend)
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from .models import Profile
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # Solo accesible para usuarios autenticados
+def get_user_points(request):
+    user = request.user
+    try:
+        profile = Profile.objects.get(user=user)
+        return Response({"points": profile.puntos})
+    except Profile.DoesNotExist:
+        return Response({"detail": "Profile not found"}, status=404)

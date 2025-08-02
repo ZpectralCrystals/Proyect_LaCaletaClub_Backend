@@ -1,3 +1,4 @@
+# anuncios/models.py
 from django.db import models
 
 class Anuncio(models.Model):
