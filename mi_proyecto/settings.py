@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +31,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Aquí agregas la URL de tu frontend
     # Otras URLs si las necesitas
 ]
-
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Duración del access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # Duración del refresh token
+    'ROTATE_REFRESH_TOKENS': False,                   # Evitar la rotación del refresh token
+    'BLACKLIST_AFTER_ROTATION': True,                 # Opcional, eliminar el refresh token después de ser rotado
+}
 # Application definition
 
 INSTALLED_APPS = [
