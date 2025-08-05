@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-7ieah@89@r4lp*l%ywf4qg!nrwxi=ez6%n3i4xkogd1!p3^cg5
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
-ALLOWED_HOSTS = ['https://proyect-lacaletaclub-backend.onrender.com/']
+PORT = os.getenv('PORT', '8000')
+ALLOWED_HOSTS = ['*'] 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Aquí agregas la URL de tu frontend
     "https://proyect-la-caleta-club.vercel.app/"# Otras URLs si las necesitas
