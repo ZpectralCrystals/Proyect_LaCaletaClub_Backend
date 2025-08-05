@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'anuncios',
     'blogs',
     'descuentos',
-    'recomendaciones'
+    'recomendaciones',
 ]
 
 REST_FRAMEWORK = {
