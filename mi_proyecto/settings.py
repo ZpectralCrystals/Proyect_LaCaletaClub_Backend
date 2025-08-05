@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Aquí agregas la URL de tu frontend
-    # Otras URLs si las necesitas
+    "https://proyect-la-caleta-club.vercel.app/"# Otras URLs si las necesitas
 ]
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Duración del access token
